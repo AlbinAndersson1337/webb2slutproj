@@ -1,0 +1,120 @@
+/* Återställ standardstilar och tillämpa en grundläggande bakgrundsfärg */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: crimson; /* Ljus bakgrundsfärg */
+  font-family: Arial, sans-serif;
+  display: flex;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  height: 80%;
+}
+
+/* Vänster del (Spelområde) */
+.left-section {
+  background-color: #f9f9f9; /* Annan bakgrundsfärg för uppgraderingar */
+  border: 1px solid #000;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  background-image: url("images/zombie1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Mittendelen (Uppgraderingar) */
+.middle-section {
+  background-color: #f9f9f9; /* Annan bakgrundsfärg för uppgraderingar */
+  border: 1px solid #000;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+button {
+  background-color: #777;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+/* Högra delen (Resurser) */
+.right-section {
+  background-color: #ddd; /* Ljusare bakgrundsfärg för resurser */
+  border: 1px solid #000;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+p {
+  font-size: 18px;
+  margin: 0;
+}
+
+.resources {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.stats {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Anpassa färger, storlekar och stilar enligt dina preferenser */
+/* Du kan lägga till övergångseffekter för knappar */
+button {
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Justera storlek på spelområdet för att passa din design */
+.left-section {
+  width: 300px;
+  height: 400px;
+}
+
+/* Lägg till specifika stilar för aktiv och inaktiv status på uppgraderingsknappar */
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Lägg till en hover-effekt för spelområdet för att öka interaktiviteten */
+.left-section:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0px 0px 10px #888;
+}
+
+/* Använd flexbox för att centrera element vertikalt och horisontellt */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Om du vill ha en responsiv design, kan du använda media queries */
+@media (max-width: 768px) {
+  #left-section,
+  #middle-section,
+  #right-section {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
