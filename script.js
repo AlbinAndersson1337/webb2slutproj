@@ -7,8 +7,11 @@ const zombieImage = document.querySelector(".left-section");
 window.addEventListener("load", function () {
   zombieImage.addEventListener("click", function () {
     zombieClickCounter++;
-    clicksTKill -= 1;
-    clicksTKill.textContent = clicksTKill;
+    clicksTKill.textContent -= 1;
+
+    if (clicksTKill.textContent == 0) {
+      clicksTKill.textContent = 10;
+    }
 
     if (zombieClickCounter === reqClicks) {
       antalPlankor += 1;
