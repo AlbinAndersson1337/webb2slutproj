@@ -5,11 +5,15 @@ body {
   background-color: crimson; /* Ljus bakgrundsfärg */
   font-family: Arial, sans-serif;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   width: 100%;
   max-width: 1200px;
@@ -37,6 +41,7 @@ body {
   padding: 10px;
   border-radius: 10px;
   margin: 10px;
+  height: 25rem;
 }
 
 button {
@@ -60,6 +65,7 @@ button:hover {
   padding: 10px;
   border-radius: 10px;
   margin: 10px;
+  height: 25rem;
 }
 
 p {
