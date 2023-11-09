@@ -11,6 +11,7 @@ function genereraSlumpadeResurser(zombieTyp) {
   switch (zombieTyp) {
     case 1:
       return {
+        clicksTKill: 10,
         plankor: Math.floor(Math.random() * 3) + 1,
         pengar: 100,
         material: Math.floor(Math.random() * 3) + 3,
@@ -18,6 +19,8 @@ function genereraSlumpadeResurser(zombieTyp) {
       };
     case 2:
       return {
+        clicksTKill: 30,
+
         plankor: Math.floor(Math.random() * 4) + 3,
         pengar: 300,
         material: Math.floor(Math.random() * 7) + 9,
@@ -25,6 +28,8 @@ function genereraSlumpadeResurser(zombieTyp) {
       };
     case 3:
       return {
+        clicksTKill: 50,
+
         plankor: 9,
         pengar: 500,
         material: Math.floor(Math.random() * 6) + 15,
@@ -32,6 +37,7 @@ function genereraSlumpadeResurser(zombieTyp) {
       };
     default:
       return {
+        clicksTKill: 10,
         plankor: 0,
         pengar: 0,
         material: 0,
@@ -60,6 +66,7 @@ function hanteraZombieKlick() {
     antalPengar += slumpadeResurser.pengar;
     antalMaterial += slumpadeResurser.material;
     antalVapendelar += slumpadeResurser.vapendelar;
+    clicksTKill += slumpadeResurser.clicksTKill;
 
     const plankorElement = document.querySelector(".wood-resources");
     const pengarElement = document.querySelector(".money-resources");
@@ -76,7 +83,7 @@ function hanteraZombieKlick() {
 
   if (zombieClickCounter === reqClicks) {
     ökaAntalPlankor();
-    zombieClickCounter = 0;
+    zombieClickCounter = 10;
   }
 }
 
