@@ -21,24 +21,33 @@
 
         <div class="middle-section">
           <!-- Uppgraderingsalternativ och knappar -->
-          <button class="upgrade-base">Uppgradera Bas</button>
-          <button class="upgrade-weapon">Uppgradera Vapen</button>
+          <div class="chooseUpgrade">
+            <button class="upgrade-base">Uppgradera Bas</button>
+            <button class="upgrade-weapon">Uppgradera Vapen</button>
+          </div>
+          <div class="baseUpgrades">
+            <button class="baseUpgrade1">Base Upgrade 1</button>
+            <button class="baseUpgrade2">Base Upgrade 2</button>
+          </div>
+          <div class="weaponUpgrades">
+            <button class="weaponUpgrade1">Weapon Upgrade 1</button>
+            <button class="weaponUpgrade2">Weapon Upgrade 2</button>
+          </div>
         </div>
 
         <div class="right-section">
           <!-- Resursvisning -->
           <ul class="resources">
-            <li> Plankor: <span class="wood-resources"></span>0</span></li>
-            <li class="money-resources">Pengar: <span>0</span></li>
-            <li class="material-resources">Material: <span>0</span></li>
-            <li class="weapon-parts">Vapen delar: <span>0</span></li>
+            <li>Plankor: <span class="wood-resources">0</span></li>
+            <li>Pengar: <span class="money-resources">0</span></li>
+            <li>Material: <span class="material-resources">0</span></li>
+            <li>Vapen delar: <span class="weapon-parts">0</span></li>
           </ul>
 
-          <!--Stats-->
+          <!-- Stats -->
           <ul class="stats">
-            <li class="kills">Kills <span>0</span></li>
-            <li class="bosses">Bosses <span>0</span></li>
-            <li class="resources-stats">Resources found: <span>0</span></li>
+            <li>Kills: <span class="kills">0</span></li>
+            <li>Bosses: <span class="bosses">0</span></li>
             <li>Clicks to kill: <span class="clicks-to-kill">10</span></li>
           </ul>
         </div>

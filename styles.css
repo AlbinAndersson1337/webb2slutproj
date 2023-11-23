@@ -2,7 +2,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: crimson; /* Ljus bakgrundsfärg */
+  background-color: crimson;
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
@@ -42,6 +42,64 @@ body {
   border-radius: 10px;
   margin: 10px;
   height: 25rem;
+  width: 35rem;
+}
+
+.chooseUpgrade {
+  display: flex;
+  justify-content: center;
+  align-items: space-evenly;
+}
+
+.chooseUpgrade button {
+  background-color: #777;
+  color: #fff;
+  height: 4rem;
+  width: 15rem;
+  padding: 10px 20px;
+  border: 1px solid black;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+.baseUpgrades {
+  display: flex;
+  justify-content: left;
+  align-items: space-evenly;
+  flex-direction: column;
+}
+
+.weaponUpgrades {
+  display: flex;
+  justify-content: right;
+  align-items: space-evenly;
+  flex-direction: column;
+}
+
+.weaponUpgrades button {
+  background-color: #777;
+  color: #fff;
+  height: 4rem;
+  width: 8rem;
+  padding: 10px 20px;
+  border: none;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.baseUpgrades button {
+  background-color: #777;
+  color: #fff;
+  height: 4rem;
+  width: 8rem;
+  padding: 10px 20px;
+  border: none;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 18px;
 }
 
 button {
@@ -66,6 +124,7 @@ button:hover {
   border-radius: 10px;
   margin: 10px;
   height: 25rem;
+  width: 20rem;
 }
 
 p {

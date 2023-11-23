@@ -3,15 +3,38 @@ let zombieClickCounter = 0;
 let antalPengar = 0;
 let antalMaterial = 0;
 let antalVapendelar = 0;
-let zombieTyp = Math.floor(Math.random() * 3) + 1; //Slumpa en zombie
+let zombieTyp = Math.floor(Math.random() * 3) + 1; // Slumpa en zombie
 
 const reqClicks = 10;
-let clicksShow = document.querySelector(".clicks-to-kill");
 let clicksTKill = reqClicks; // Sätt initialt antal klick att döda till reqClicks
 
-const zombieImage = document.querySelector(".left-section img");
+const zombieImage = document.querySelector(".left-section");
 const clicksToKillElement = document.querySelector(".clicks-to-kill");
+const plankorElement = document.querySelector(".wood-resources");
+const pengarElement = document.querySelector(".money-resources");
+const materialElement = document.querySelector(".material-resources");
+const vapendelarElement = document.querySelector(".weapon-parts");
+const stats = document.querySelector(".stats");
 
+const baseUpgradeBtn = document.querySelector(".upgrade-base");
+const weaponUpgradeBtn = document.querySelector(".upgrade-weapon");
+
+const baseUpgradeSection = document.querySelector(".baseUpgrades");
+const weaponUpgradeSection = document.querySelector(".weaponUpgrades");
+
+weaponUpgradeSection.style.display = "none";
+
+baseUpgradeBtn.addEventListener("click", function () {
+  baseUpgradeSection.style.display = "block";
+  weaponUpgradeSection.style.display = "none";
+});
+
+weaponUpgradeBtn.addEventListener("click", function () {
+  baseUpgradeSection.style.display = "none";
+  weaponUpgradeSection.style.display = "block";
+});
+
+let killCount = 0;
 let kills = document.querySelector(".kills");
 
 function genereraSlumpadeResurser(zombieTyp) {
@@ -25,7 +48,6 @@ function genereraSlumpadeResurser(zombieTyp) {
       };
     case 2:
       return {
-        reqClicks: 10,
         plankor: Math.floor(Math.random() * 4) + 3,
         pengar: 300,
         material: Math.floor(Math.random() * 7) + 9,
@@ -33,7 +55,6 @@ function genereraSlumpadeResurser(zombieTyp) {
       };
     case 3:
       return {
-        reqClicks: 30,
         plankor: 9,
         pengar: 500,
         material: Math.floor(Math.random() * 6) + 15,
@@ -41,7 +62,6 @@ function genereraSlumpadeResurser(zombieTyp) {
       };
     default:
       return {
-        reqClicks: 50,
         plankor: 0,
         pengar: 0,
         material: 0,
@@ -50,32 +70,26 @@ function genereraSlumpadeResurser(zombieTyp) {
   }
 }
 
-// funktion för att öka antalet plankor
+// Funktion för att öka antalet plankor
 function ökaAntalPlankor() {
   antalPlankor += 1;
-  const plankorElement = document.querySelector(".wood-resources");
   plankorElement.textContent = antalPlankor;
 }
 
-// funktion för att hantera klick på zombien
+// Funktion för att hantera klick på zombien
 function hanteraZombieKlick() {
   zombieClickCounter++;
-  clicksShow.textContent -= 1; // Minska antalet klick att döda
+  clicksTKill -= 1;
 
-  // Uppdatera gränssnittet
+  clicksToKillElement.textContent = clicksTKill;
 
-  if (clicksTKill == 0) {
-    const slumpadeResurser = genereraSlumpadeResurser(zombieTyp); //Slumpa resurser
+  if (clicksTKill === 0) {
+    const slumpadeResurser = genereraSlumpadeResurser(zombieTyp);
 
     antalPlankor += slumpadeResurser.plankor;
     antalPengar += slumpadeResurser.pengar;
     antalMaterial += slumpadeResurser.material;
     antalVapendelar += slumpadeResurser.vapendelar;
-
-    const plankorElement = document.querySelector(".wood-resources");
-    const pengarElement = document.querySelector(".money-resources");
-    const materialElement = document.querySelector(".material-resources");
-    const vapendelarElement = document.querySelector(".weapon-parts-resources");
 
     plankorElement.textContent = antalPlankor;
     pengarElement.textContent = antalPengar;
@@ -84,24 +98,24 @@ function hanteraZombieKlick() {
 
     zombieClickCounter = 0;
 
-    // Slumpa en ny zombie-typ för nästa zombi
     zombieTyp = Math.floor(Math.random() * 3) + 1;
 
     clicksTKill = reqClicks;
-    clicksTKill.textContent = reqClicks; // Återställ antalet klick att döda till det krävda antalet
+    clicksToKillElement.textContent = clicksTKill;
   }
 
   if (zombieClickCounter === reqClicks) {
     ökaAntalPlankor();
-    zombieClickCounter = reqClicks - 1;
-    kills.textContent += 1;
+    zombieClickCounter = 0;
+    kills.textContent = killCount += 1;
+    console.log(killCount);
   }
 }
 
-// funktion som körs när sidan har laddats helt
+// Funktion som körs när sidan har laddats helt
 function init() {
   zombieImage.addEventListener("click", hanteraZombieKlick);
 }
 
-// lyssna på "load"-händelsen för att köra init-funktionen
+// Lyssna på "load"-händelsen för att köra init-funktionen
 window.addEventListener("load", init);
