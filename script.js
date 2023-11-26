@@ -22,6 +22,7 @@ const weaponUpgradeBtn = document.querySelector(".upgrade-weapon");
 const baseUpgradeSection = document.querySelector(".baseUpgrades");
 const weaponUpgradeSection = document.querySelector(".weaponUpgrades");
 
+//Uppgradering visuellt
 weaponUpgradeSection.style.display = "none";
 
 baseUpgradeBtn.addEventListener("click", function () {
@@ -33,6 +34,32 @@ weaponUpgradeBtn.addEventListener("click", function () {
   baseUpgradeSection.style.display = "none";
   weaponUpgradeSection.style.display = "block";
 });
+// ------------------------------
+
+const baseUpgrade1 = document.querySelector(".baseUpgrade1");
+const baseUpgrade2 = document.querySelector(".baseUpgrade2");
+let plankGainInterval;
+let baseUpgradeCount = 0;
+
+baseUpgrade1.addEventListener("click", function () {
+  const upgradeCost = calculateUpgradeCost(baseUpgradeCount);
+
+  if (antalPlankor >= upgradeCost) {
+    antalPlankor -= 6;
+    plankorElement.textContent = antalPlankor;
+
+    plankGainInterval = setInterval(function () {
+      antalPlankor += 1;
+      plankorElement.textContent = antalPlankor;
+    }, 1000);
+
+    baseUpgradeCount += 1;
+  }
+});
+
+function calculateUpgradeCost(baseUpgradeCount) {
+  return Math.ceil(6 * Math.pow(1.05, count));
+}
 
 let killCount = 0;
 let kills = document.querySelector(".kills");
