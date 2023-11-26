@@ -66,40 +66,45 @@ body {
 
 .baseUpgrades {
   display: flex;
-  justify-content: left;
-  align-items: space-evenly;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
 .weaponUpgrades {
   display: flex;
-  justify-content: right;
-  align-items: space-evenly;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
 .weaponUpgrades button {
   background-color: #777;
   color: #fff;
-  height: 4rem;
-  width: 8rem;
+  height: 7rem;
+  width: 25rem;
   padding: 10px 20px;
   border: none;
   margin: 10px;
   cursor: pointer;
   font-size: 18px;
+
+  border-radius: 10px;
+  border: 1px solid black;
 }
 
 .baseUpgrades button {
   background-color: #777;
   color: #fff;
   height: 7rem;
-  width: 12rem;
+  width: 25rem;
   padding: 10px 20px;
   border: none;
   margin: 10px;
   cursor: pointer;
   font-size: 18px;
+
+  border-radius: 10px;
 }
 
 button {

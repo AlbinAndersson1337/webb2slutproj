@@ -45,8 +45,11 @@ baseUpgrade1.addEventListener("click", function () {
   const upgradeCost = calculateUpgradeCost(baseUpgradeCount);
 
   if (antalPlankor >= upgradeCost) {
+    const bUpg1Text = document.querySelector(".bUpg1");
+
     antalPlankor -= 6;
     plankorElement.textContent = antalPlankor;
+    bUpg1Text.textContent = upgradeCost;
 
     plankGainInterval = setInterval(function () {
       antalPlankor += 1;
@@ -57,7 +60,7 @@ baseUpgrade1.addEventListener("click", function () {
   }
 });
 
-function calculateUpgradeCost(baseUpgradeCount) {
+function calculateUpgradeCost(count) {
   return Math.ceil(6 * Math.pow(1.05, count));
 }
 
