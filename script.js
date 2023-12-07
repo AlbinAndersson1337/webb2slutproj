@@ -18,6 +18,7 @@ const stats = document.querySelector(".stats");
 
 const baseUpgradeBtn = document.querySelector(".upgrade-base");
 const weaponUpgradeBtn = document.querySelector(".upgrade-weapon");
+let resourcesInterval;
 
 const baseUpgradeSection = document.querySelector(".baseUpgrades");
 const weaponUpgradeSection = document.querySelector(".weaponUpgrades");
@@ -35,7 +36,7 @@ weaponUpgradeBtn.addEventListener("click", function () {
   weaponUpgradeSection.style.display = "block";
 });
 // ------------------------------
-
+/*
 const baseUpgrade1 = document.querySelector(".baseUpgrade1");
 const baseUpgrade2 = document.querySelector(".baseUpgrade2");
 let plankGainInterval;
@@ -58,11 +59,83 @@ baseUpgrade1.addEventListener("click", function () {
 
     baseUpgradeCount += 1;
   }
-});
+});*/
 
-function calculateUpgradeCost(count) {
-  return Math.ceil(6 * Math.pow(1.05, count));
+function handleUpgrade(upgradeElement, resources, cost, rate) {
+  let count = 0;
+
+  upgradeElement.addEventListener("click", function () {
+    const upgradeCost = calculateUpgradeCost(cost, count);
+
+    if (resourcesAreSufficient(resources, upgradeCost)) {
+      spendResources(resources, upgradeCost);
+      startResourceGainInterval(resources, rate);
+
+      count++;
+      updateUpgradeCost(upgradeElement, cost, count);
+    }
+  });
 }
+
+function calculateUpgradeCost(baseCost, count) {
+  return Math.ceil(baseCost * Math.pow(1.05, count));
+}
+
+function resourcesAreSufficient(resources, cost) {
+  return resources.every((resource, index) => resource >= cost[index]);
+}
+
+function spendResources(resources, cost) {
+  resources.forEach((resource, index) => (resources[index] -= cost[index]));
+
+  resources.forEach((resource, index) =>
+    updateResourceDisplay(index, resource)
+  );
+}
+
+function startResourceGainInterval(resources, rate) {
+  if (!resourcesInterval) {
+    resourcesInterval = setInterval(function () {
+      resources.forEach((resource, index) => {
+        resources[index] += rate[index];
+        updateResourceDisplay(index, resources[index]);
+      });
+    }, 1000);
+  }
+}
+
+function updateResourceDisplay(resourceType, value) {
+  // Update the display for the specified resource type
+  const element = document.querySelector(`.${resourceType}-resources`);
+  if (element) {
+    element.textContent = value;
+  }
+}
+
+function updateUpgradeCost(upgradeElement, baseCost, count) {
+  // Update the display for the upgrade cost
+  const costElement = upgradeElement.querySelector(".upgrade-cost");
+  if (costElement) {
+    const upgradeCost = calculateUpgradeCost(baseCost, count);
+    costElement.textContent = upgradeCost;
+  }
+}
+
+var baseUpgrade1 = document.querySelector(".baseUpgrade1");
+var baseUpgrade2 = document.querySelector(".baseUpgrade2");
+
+handleUpgrade(
+  baseUpgrade1,
+  [antalPlankor, antalPengar, antalMaterial],
+  [6, 20, 10],
+  [1, 5, 3]
+);
+handleUpgrade(
+  baseUpgrade2,
+  [antalPlankor, antalPengar, antalMaterial],
+  [10, 30, 20],
+  [2, 10, 5]
+);
 
 let killCount = 0;
 let kills = document.querySelector(".kills");
