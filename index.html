@@ -6,57 +6,56 @@
     <title>Zombie Apocalypse Clicker</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Zombie Apocalypse Clicker</title>
-    </head>
-    <body>
-      <section class="container">
-        <div class="left-section">
-          <!-- Spelområde med zombie -->
+  <body>
+    <audio src="" id="backgroundMusic" loop>
+      <source src="images/lost-soul_medium-177571.mp3" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <button id="toggleButton">Toggle Sound</button>
+
+    <section class="container">
+      <div class="left-section">
+        <!-- Spelområde med zombie -->
+      </div>
+
+      <div class="middle-section">
+        <!-- Uppgraderingsalternativ och knappar -->
+        <div class="chooseUpgrade">
+          <button class="upgrade-base">Uppgradera Bas</button>
+          <button class="upgrade-weapon">Uppgradera Vapen</button>
         </div>
-
-        <div class="middle-section">
-          <!-- Uppgraderingsalternativ och knappar -->
-          <div class="chooseUpgrade">
-            <button class="upgrade-base">Uppgradera Bas</button>
-            <button class="upgrade-weapon">Uppgradera Vapen</button>
-          </div>
-          <div class="baseUpgrades">
-            <button class="baseUpgrade1">
-              Base Upgrade 1 - <span class="bUpg1">6 </span>planks - +1
-              plank/second
-            </button>
-            <button class="baseUpgrade2">Base Upgrade 2</button>
-          </div>
-          <div class="weaponUpgrades">
-            <button class="weaponUpgrade1">Weapon Upgrade 1</button>
-            <button class="weaponUpgrade2">Weapon Upgrade 2</button>
-          </div>
+        <div class="baseUpgrades">
+          <button class="baseUpgrade1">
+            Base Upgrade 1 - <span class="bUpg1">6 </span>planks - +1
+            plank/second
+          </button>
+          <button class="baseUpgrade2">Base Upgrade 2</button>
         </div>
-
-        <div class="right-section">
-          <!-- Resursvisning -->
-          <ul class="resources">
-            <li>Plankor: <span class="wood-resources">0</span></li>
-            <li>Pengar: <span class="money-resources">0</span></li>
-            <li>Material: <span class="material-resources">0</span></li>
-            <li>Vapen delar: <span class="weapon-parts">0</span></li>
-          </ul>
-
-          <!-- Stats -->
-          <ul class="stats">
-            <li>Kills: <span class="kills">0</span></li>
-            <li>Bosses: <span class="bosses">0</span></li>
-            <li>Clicks to kill: <span class="clicks-to-kill">10</span></li>
-          </ul>
+        <div class="weaponUpgrades">
+          <button class="weaponUpgrade1">Weapon Upgrade 1</button>
+          <button class="weaponUpgrade2">Weapon Upgrade 2</button>
         </div>
-      </section>
+      </div>
 
-      <script src="script.js"></script>
-    </body>
-  </html>
+      <div class="right-section">
+        <!-- Resursvisning -->
+        <ul class="resources">
+          <li>Plankor: <span class="wood-resources">0</span></li>
+          <li>Pengar: <span class="money-resources">0</span></li>
+          <li>Material: <span class="material-resources">0</span></li>
+          <li>Vapen delar: <span class="weapon-parts">0</span></li>
+        </ul>
+
+        <!-- Stats -->
+        <ul class="stats">
+          <li>Kills: <span class="kills">0</span></li>
+          <li>Bosses: <span class="bosses">0</span></li>
+          <li>Clicks to kill: <span class="clicks-to-kill">10</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
 </html>

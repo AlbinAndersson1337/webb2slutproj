@@ -18,6 +18,7 @@ const stats = document.querySelector(".stats");
 
 const baseUpgradeBtn = document.querySelector(".upgrade-base");
 const weaponUpgradeBtn = document.querySelector(".upgrade-weapon");
+
 let resourcesInterval;
 
 const baseUpgradeSection = document.querySelector(".baseUpgrades");
@@ -71,7 +72,7 @@ function handleUpgrade(upgradeElement, resources, cost, rate) {
       spendResources(resources, upgradeCost);
       startResourceGainInterval(resources, rate);
 
-      count++;
+      count += 1;
       updateUpgradeCost(upgradeElement, cost, count);
     }
   });
@@ -121,8 +122,8 @@ function updateUpgradeCost(upgradeElement, baseCost, count) {
   }
 }
 
-var baseUpgrade1 = document.querySelector(".baseUpgrade1");
-var baseUpgrade2 = document.querySelector(".baseUpgrade2");
+let baseUpgrade1 = document.querySelector(".baseUpgrade1");
+let baseUpgrade2 = document.querySelector(".baseUpgrade2");
 
 handleUpgrade(
   baseUpgrade1,
@@ -214,6 +215,24 @@ function hanteraZombieKlick() {
     console.log(killCount);
   }
 }
+
+// hämta ljud
+const backgroundMusic = document.querySelector("#backgroundMusic");
+const toggleButton = document.querySelector("#toggleButton");
+
+toggleButton.addEventListener("click", () => {
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+    toggleButton.textContent = "Pause music";
+  } else {
+    backgroundMusic.pause();
+    toggleButton.textContent = "Play music";
+  }
+});
+
+window.addEventListener("load", (event) => {
+  backgroundMusic.play();
+});
 
 // Funktion som körs när sidan har laddats helt
 function init() {
