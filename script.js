@@ -66,12 +66,15 @@ function handleUpgrade(upgradeElement, resources, cost, rate) {
   let count = 0;
 
   upgradeElement.addEventListener("click", function () {
-    console.log("clicked");
     const upgradeCost = calculateUpgradeCost(cost, count);
+
+    console.log("Clicked");
+    console.log("Base cost:", cost);
+    console.log("Count:", count);
     console.log("Upgrade cost:", upgradeCost);
 
     if (resourcesAreSufficient(resources, upgradeCost)) {
-      console.log("Upgrading..");
+      console.log("Sufficient resources");
       spendResources(resources, upgradeCost);
       startResourceGainInterval(resources, rate);
 
@@ -84,10 +87,16 @@ function handleUpgrade(upgradeElement, resources, cost, rate) {
 }
 
 function calculateUpgradeCost(baseCost, count) {
+  console.log("Base cost:", baseCost);
+  console.log("Count:", count);
   return Math.ceil(baseCost * Math.pow(1.05, count));
+  console.log("Upgrade cost:", upgradeCost);
+  return upgradeCost;
 }
 
 function resourcesAreSufficient(resources, cost) {
+  console.log("Resources:", resources);
+  console.log("Cost:", cost);
   return resources.every((resource, index) => resource >= cost[index]);
 }
 
