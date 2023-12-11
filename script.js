@@ -229,7 +229,7 @@ function hanteraZombieKlick() {
     console.log(killCount);
   }
 }
-/*
+
 // hämta ljud
 const backgroundMusic = document.querySelector("#backgroundMusic");
 const toggleButton = document.querySelector("#toggleButton");
@@ -246,7 +246,7 @@ toggleButton.addEventListener("click", () => {
 
 window.addEventListener("load", (event) => {
   backgroundMusic.play();
-});*/
+});
 
 // Funktion som körs när sidan har laddats helt
 function init() {
