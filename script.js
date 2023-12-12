@@ -33,21 +33,25 @@ const allInfo = {
     plankor: {
       value: 0,
       inc: 0,
+      factor: 1,
       ref: plankorElement,
     },
     pengar: {
       value: 0,
       inc: 0,
+      factor: 1,
       ref: pengarElement,
     },
     material: {
       value: 0,
       inc: 0,
+      factor: 1,
       ref: materialElement,
     },
     vapendelar: {
       value: 0,
       inc: 0,
+      factor: 1,
       ref: vapendelarElement,
     },
   },
@@ -80,7 +84,7 @@ weaponUpgradeBtn.addEventListener("click", function () {
   weaponUpgradeSection.style.display = "block";
 });
 
-function handleUpgrade(upgradeElement, resources, cost, rate) {
+function handleUpgrade(upgradeElement, cost, rate, factors) {
   let count = 0;
 
   upgradeElement.addEventListener("click", function () {
@@ -89,6 +93,10 @@ function handleUpgrade(upgradeElement, resources, cost, rate) {
     if (resourcesAreSufficient(upgradeCost)) {
       spendResources(upgradeCost);
       startResourceGainInterval(rate);
+
+      Object.keys(factors).forEach((r, i) => {
+        allInfo.resurser[r].factor += factors[r];
+      });
 
       count += 1;
       updateUpgradeCost(upgradeElement, cost, count);
@@ -161,6 +169,8 @@ function updateUpgradeCost(upgradeElement, baseCost, count) {
 let baseUpgrade1 = document.querySelector(".baseUpgrade1");
 let baseUpgrade2 = document.querySelector(".baseUpgrade2");
 
+let weaponUpgrade1 = document.querySelector(".weaponUpgrade1");
+
 handleUpgrade(
   baseUpgrade1,
   [antalPlankor, antalPengar, antalMaterial],
@@ -172,6 +182,14 @@ handleUpgrade(
   [antalPlankor, antalPengar, antalMaterial],
   [10, 30, 20, 0],
   [2, 10, 5, 0]
+);
+
+handleUpgrade(
+  weaponUpgrade1,
+  [antalPlankor, antalPengar, antalMaterial, antalVapendelar],
+  [10, 200, 20, 10],
+  [0, 0, 0, 0],
+  { plankor: 1.5, pengar: 1.1, material: 1.05, vapendelar: 1.15 }
 );
 
 let killCount = 0;
