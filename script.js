@@ -34,21 +34,25 @@ const allInfo = {
       value: 0,
       inc: 0,
       ref: plankorElement,
+      faktor: 1,
     },
     pengar: {
       value: 0,
       inc: 0,
       ref: pengarElement,
+      faktor: 1,
     },
     material: {
       value: 0,
       inc: 0,
       ref: materialElement,
+      faktor: 1,
     },
     vapendelar: {
       value: 0,
       inc: 0,
       ref: vapendelarElement,
+      faktor: 1,
     },
   },
 };
@@ -176,7 +180,21 @@ handleUpgrade(
   [2, 10, 5, 0]
 );
 
-let killCount = 0;
+const weaponUpg1 = document.querySelector(".weaponUpgrade1");
+weaponUpg1.addEventListener("click", function () {
+  allInfo.resurser.plankor.faktor += 0.1;
+  allInfo.resurser.pengar.faktor += 0.1;
+  allInfo.resurser.material.faktor += 0.1;
+  allInfo.resurser.vapendelar.faktor += 0.1;
+});
+const weaponUpg2 = document.querySelector(".weaponUpgrade2");
+weaponUpg2.addEventListener("click", function () {
+  allInfo.resurser.plankor.faktor += 0.25;
+  allInfo.resurser.pengar.faktor += 0.25;
+  allInfo.resurser.material.faktor += 0.25;
+  allInfo.resurser.vapendelar.faktor += 0.25;
+});
+
 let kills = document.querySelector(".kills");
 
 function genereraSlumpadeResurser(zombieTyp) {
@@ -230,7 +248,29 @@ function hanteraZombieKlick() {
 
   if (clicksTKill === 0) {
     const slumpadeResurser = genereraSlumpadeResurser(zombieTyp);
+    const clickTest = clicksToKillobj.zombies["zombie" + zombieTyp].clicksTKill;
+    console.log("Innan justering");
+    console.log(slumpadeResurser);
+    slumpadeResurser.plankor = Math.floor(
+      (slumpadeResurser.plankor =
+        slumpadeResurser.plankor * allInfo.resurser.plankor.faktor)
+    );
+    slumpadeResurser.plankor = Math.floor(
+      (slumpadeResurser.plankor =
+        slumpadeResurser.plankor * allInfo.resurser.pengar.faktor)
+    );
+    slumpadeResurser.plankor = Math.floor(
+      (slumpadeResurser.plankor =
+        slumpadeResurser.plankor * allInfo.resurser.material.faktor)
+    );
+    slumpadeResurser.plankor = Math.floor(
+      (slumpadeResurser.plankor =
+        slumpadeResurser.plankor * allInfo.resurser.vapendelar.faktor)
+    );
+    console.log("Efter justering");
+    console.log(slumpadeResurser);
 
+    console.log(clickTest);
     antalPlankor += slumpadeResurser.plankor;
     antalPengar += slumpadeResurser.pengar;
     antalMaterial += slumpadeResurser.material;
@@ -253,15 +293,10 @@ function hanteraZombieKlick() {
 
     zombieTyp = Math.floor(Math.random() * 3) + 1;
 
-    clicksTKill = reqClicks;
-    clicksToKillElement.textContent = clicksTKill;
-  }
-
-  if (zombieClickCounter === reqClicks) {
-    ökaAntalPlankor();
-    zombieClickCounter = 0;
     kills.textContent = killCount += 1;
-    console.log(killCount);
+
+    clicksTKill = clickTest;
+    clicksToKillElement.textContent = clicksTKill;
   }
 }
 
