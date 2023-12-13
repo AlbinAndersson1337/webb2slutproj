@@ -165,8 +165,6 @@ function updateUpgradeCost(upgradeElement, baseCost, count) {
 let baseUpgrade1 = document.querySelector(".baseUpgrade1");
 let baseUpgrade2 = document.querySelector(".baseUpgrade2");
 
-let weaponUpgrade1 = document.querySelector(".weaponUpgrade1");
-
 handleUpgrade(
   baseUpgrade1,
   [antalPlankor, antalPengar, antalMaterial],
@@ -179,24 +177,6 @@ handleUpgrade(
   [10, 30, 20, 0],
   [2, 10, 5, 0]
 );
-/*
-const weaponUpg1 = document.querySelector(".weaponUpgrade1");
-weaponUpg1.addEventListener("click", function () {
-  allInfo.resurser.plankor.faktor += 0.1;
-  allInfo.resurser.pengar.faktor += 0.1;
-  allInfo.resurser.material.faktor += 0.1;
-  allInfo.resurser.vapendelar.faktor += 0.1;
-});
-const weaponUpg2 = document.querySelector(".weaponUpgrade2");
-weaponUpg2.addEventListener("click", function () {
-  allInfo.resurser.plankor.faktor += 0.25;
-  allInfo.resurser.pengar.faktor += 0.25;
-  allInfo.resurser.material.faktor += 0.25;
-  allInfo.resurser.vapendelar.faktor += 0.25;
-});
-*/
-
-let slumpadeResurser = {}; // Declare at a higher scope
 
 function handleWepUpgrade(upgradeElement, resources, cost, factors) {
   let count = 0;
@@ -207,26 +187,25 @@ function handleWepUpgrade(upgradeElement, resources, cost, factors) {
     if (resourcesAreSufficient(upgradeCost)) {
       spendResources(upgradeCost);
 
-      // Apply factors directly to resources
       resources.forEach((resource, i) => {
-        slumpadeResurser[resource] = Math.floor(
-          slumpadeResurser[resource] * factors[i]
-        );
+        allInfo.resurser[resource].faktor =
+          allInfo.resurser[resource].faktor * factors[i];
       });
 
       count += 1;
       updateUpgradeCost(upgradeElement, cost, count);
     } else {
-      // Handle insufficient resources
+      console.log("Broke");
     }
   });
 }
 
-// Example usage
+const weaponUpgrade1 = document.querySelector(".weaponUpgrade1");
+
 handleWepUpgrade(
   weaponUpgrade1,
-  ["plankor", "pengar", "material", "vapendelar"],
-  [10, 50, 30, 10],
+  ["plankor", "pengar", "material"],
+  [10, 30, 20, 40],
   [1.2, 1.1, 1.5, 1.3]
 );
 
