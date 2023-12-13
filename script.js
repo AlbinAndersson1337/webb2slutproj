@@ -4,7 +4,7 @@ let antalPengar = 0;
 let antalMaterial = 0;
 let antalVapendelar = 0;
 let zombieTyp = Math.floor(Math.random() * 3) + 1; // Slumpa en zombie
-
+let killCount = 0;
 const reqClicks = 10;
 let clicksTKill = reqClicks; // Sätt initialt antal klick att döda till reqClicks
 
@@ -179,7 +179,7 @@ handleUpgrade(
   [10, 30, 20, 0],
   [2, 10, 5, 0]
 );
-
+/*
 const weaponUpg1 = document.querySelector(".weaponUpgrade1");
 weaponUpg1.addEventListener("click", function () {
   allInfo.resurser.plankor.faktor += 0.1;
@@ -194,6 +194,41 @@ weaponUpg2.addEventListener("click", function () {
   allInfo.resurser.material.faktor += 0.25;
   allInfo.resurser.vapendelar.faktor += 0.25;
 });
+*/
+
+let slumpadeResurser = {}; // Declare at a higher scope
+
+function handleWepUpgrade(upgradeElement, resources, cost, factors) {
+  let count = 0;
+
+  upgradeElement.addEventListener("click", function () {
+    const upgradeCost = calculateUpgradeCost(cost, count);
+
+    if (resourcesAreSufficient(upgradeCost)) {
+      spendResources(upgradeCost);
+
+      // Apply factors directly to resources
+      resources.forEach((resource, i) => {
+        slumpadeResurser[resource] = Math.floor(
+          slumpadeResurser[resource] * factors[i]
+        );
+      });
+
+      count += 1;
+      updateUpgradeCost(upgradeElement, cost, count);
+    } else {
+      // Handle insufficient resources
+    }
+  });
+}
+
+// Example usage
+handleWepUpgrade(
+  weaponUpgrade1,
+  ["plankor", "pengar", "material", "vapendelar"],
+  [10, 50, 30, 10],
+  [1.2, 1.1, 1.5, 1.3]
+);
 
 let kills = document.querySelector(".kills");
 
