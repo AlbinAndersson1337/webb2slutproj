@@ -189,13 +189,25 @@ body {
   height: 100vh;
 }
 
-/* Om du vill ha en responsiv design, kan du använda media queries */
-@media (max-width: 768px) {
-  #left-section,
-  #middle-section,
-  #right-section {
-    display: block;
+@media only screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left-section,
+  .middle-section,
+  .right-section {
     width: 100%;
-    margin: 0 auto;
+    margin: 0;
+  }
+
+  .middle-section {
+    height: auto;
+  }
+
+  .chooseUpgrade button,
+  .weaponUpgrades button,
+  .baseUpgrades button {
+    width: 100%;
   }
 }
