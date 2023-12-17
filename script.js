@@ -201,12 +201,18 @@ function handleWepUpgrade(upgradeElement, resources, cost, factors) {
 }
 
 const weaponUpgrade1 = document.querySelector(".weaponUpgrade1");
-
+const weaponUpgrade2 = document.querySelector(".weaponUpgrade2");
 handleWepUpgrade(
   weaponUpgrade1,
   ["plankor", "pengar", "material"],
   [10, 30, 20, 40],
   [1.2, 1.1, 1.5, 1.3]
+);
+handleWepUpgrade(
+  weaponUpgrade2,
+  ["plankor", "pengar", "material"],
+  [20, 40, 30, 50],
+  [1.3, 1.2, 1.6, 1.4]
 );
 
 let kills = document.querySelector(".kills");
@@ -326,10 +332,6 @@ toggleButton.addEventListener("click", () => {
     backgroundMusic.pause();
     toggleButton.textContent = "Play music";
   }
-});
-
-window.addEventListener("load", (event) => {
-  backgroundMusic.play();
 });
 
 const zmbImg = document.querySelector(".left-section");
