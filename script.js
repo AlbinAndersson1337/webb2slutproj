@@ -1,3 +1,4 @@
+// initiera grundläggande variabler
 let antalPlankor = 0;
 let zombieClickCounter = 0;
 let antalPengar = 0;
@@ -6,8 +7,8 @@ let antalVapendelar = 0;
 let zombieTyp = Math.floor(Math.random() * 3) + 1; // Slumpa en zombie
 let killCount = 0;
 const reqClicks = 10;
-let clicksTKill = reqClicks; // Sätt initialt antal klick att döda till reqClicks
-
+let clicksTKill = reqClicks;
+// element för spelområdet och resurser
 const zombieImage = document.querySelector(".left-section");
 const clicksToKillElement = document.querySelector(".clicks-to-kill");
 const plankorElement = document.querySelector(".wood-resources");
@@ -19,15 +20,17 @@ const resourceReferences = [plankorElement, pengarElement, materialElement];
 const vapendelarElement = document.querySelector(".weapon-parts");
 const stats = document.querySelector(".stats");
 
+//uppgradeingsknappar
 const baseUpgradeBtn = document.querySelector(".upgrade-base");
 const weaponUpgradeBtn = document.querySelector(".upgrade-weapon");
+// inställningar för intervalluppgradering
 
 let resourcesInterval = null;
 let testInterval = null;
 
 const baseUpgradeSection = document.querySelector(".baseUpgrades");
 const weaponUpgradeSection = document.querySelector(".weaponUpgrades");
-
+//lagrar all resurs info
 const allInfo = {
   resurser: {
     plankor: {
@@ -56,7 +59,7 @@ const allInfo = {
     },
   },
 };
-
+// lagrar info för hur många klick för att döda zombie
 const clicksToKillobj = {
   zombies: {
     zombie1: {
@@ -71,7 +74,7 @@ const clicksToKillobj = {
   },
 };
 
-//Uppgradering visuellt
+//döljer uppgraderingar för vapen och vice versa
 weaponUpgradeSection.style.display = "none";
 
 baseUpgradeBtn.addEventListener("click", function () {
@@ -84,6 +87,7 @@ weaponUpgradeBtn.addEventListener("click", function () {
   weaponUpgradeSection.style.display = "block";
 });
 
+// basfunktionen för uppgraderingarna
 function handleUpgrade(upgradeElement, resources, cost, rate) {
   let count = 0;
 
@@ -101,7 +105,7 @@ function handleUpgrade(upgradeElement, resources, cost, rate) {
     }
   });
 }
-
+// kalkulerar uppgraderingskostnaden
 function calculateUpgradeCost(baseCost, count) {
   let ret = [];
   for (let i = 0; i < baseCost.length; i++) {
@@ -111,19 +115,19 @@ function calculateUpgradeCost(baseCost, count) {
   return ret;
   return Math.ceil(baseCost * Math.pow(1.05, count));
 }
-
+// kollar om man har tillräckligt med resurser
 function resourcesAreSufficient(cost) {
   return Object.keys(allInfo.resurser).every(
     (r, i) => allInfo.resurser[r].value >= cost[i]
   );
 }
-
+// spenderar resurser
 function spendResources(cost) {
   Object.keys(allInfo.resurser).forEach(
     (r, i) => (allInfo.resurser[r].value -= cost[i])
   );
 }
-
+// startar intervallet för att öka resurserna
 function startResourceGainInterval(rate) {
   // Update inc
   Object.keys(allInfo.resurser).forEach(
@@ -139,20 +143,20 @@ function startResourceGainInterval(rate) {
     }, 1000);
   }
 }
-
+// visar resursvärdena
 function displayResourceValues() {
   Object.keys(allInfo.resurser).forEach((r) => {
     allInfo.resurser[r].ref.textContent = allInfo.resurser[r].value;
   });
 }
-
+// uppdaterar displayen för resurserna
 function updateResourceDisplay(index, value) {
   const resourceReference = resourceReferences[index];
   if (resourceReference) {
     resourceReference.textContent = value;
   }
 }
-
+//  uppdaterar uppgraderingskostnaden
 function updateUpgradeCost(upgradeElement, baseCost, count) {
   // Update the display for the upgrade cost
   const costElement = upgradeElement.querySelector(".bUpg1");
@@ -161,10 +165,10 @@ function updateUpgradeCost(upgradeElement, baseCost, count) {
     costElement.textContent = upgradeCost;
   }
 }
-
+// basfunktionen för uppgraderingarna
 let baseUpgrade1 = document.querySelector(".baseUpgrade1");
 let baseUpgrade2 = document.querySelector(".baseUpgrade2");
-
+// kallar på funktionen för uppgraderingarna
 handleUpgrade(
   baseUpgrade1,
   [antalPlankor, antalPengar, antalMaterial],
@@ -177,7 +181,7 @@ handleUpgrade(
   [10, 30, 20, 0],
   [2, 10, 5, 0]
 );
-
+// funktion för uppgradering av vapen
 function handleWepUpgrade(upgradeElement, resources, cost, factors) {
   let count = 0;
 
@@ -199,7 +203,7 @@ function handleWepUpgrade(upgradeElement, resources, cost, factors) {
     }
   });
 }
-
+// kallar på funktionen för uppgradering av vapen
 const weaponUpgrade1 = document.querySelector(".weaponUpgrade1");
 const weaponUpgrade2 = document.querySelector(".weaponUpgrade2");
 handleWepUpgrade(
@@ -214,9 +218,9 @@ handleWepUpgrade(
   [20, 40, 30, 50],
   [1.3, 1.2, 1.6, 1.4]
 );
-
+// hämtar element för att visa antal dödade zombies
 let kills = document.querySelector(".kills");
-
+// funktion för att generera slumpade resurser
 function genereraSlumpadeResurser(zombieTyp) {
   switch (zombieTyp) {
     case 1:
@@ -267,10 +271,12 @@ function hanteraZombieKlick() {
   clicksToKillElement.textContent = clicksTKill;
 
   if (clicksTKill === 0) {
+    // Generera slumpade resurser
     const slumpadeResurser = genereraSlumpadeResurser(zombieTyp);
     const clickTest = clicksToKillobj.zombies["zombie" + zombieTyp].clicksTKill;
     console.log("Innan justering");
     console.log(slumpadeResurser);
+    // Justera resurserna med faktorerna
     slumpadeResurser.plankor = Math.floor(
       (slumpadeResurser.plankor =
         slumpadeResurser.plankor * allInfo.resurser.plankor.faktor)
@@ -333,10 +339,10 @@ toggleButton.addEventListener("click", () => {
     toggleButton.textContent = "Play music";
   }
 });
-
+// hämta bild
 const zmbImg = document.querySelector(".left-section");
 let state = false;
-
+// ändra bild
 zmbImg.addEventListener("click", () => {
   if (clicksTKill > 0) {
     if (zombieTyp === 1) {
@@ -356,5 +362,5 @@ function init() {
   zombieImage.addEventListener("click", hanteraZombieKlick);
 }
 
-// Lyssna på "load"-händelsen för att köra init-funktionen
+// lyssna på "load"-händelsen för att köra init-funktionen
 window.addEventListener("load", init);
